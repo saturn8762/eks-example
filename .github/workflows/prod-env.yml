@@ -4,6 +4,8 @@ on:
   pull_request:
     branches: [ main ]
     types: [ opened, synchronize ]
+  push:
+    branches: [ main ]
 
 permissions:
       id-token: write
@@ -30,4 +32,8 @@ jobs:
 
       - name: where am i
         run: |
-          pwd && ls
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "PR!!"
+          elif [ "${{ github.event_name }}" == "push" ]; then
+            echo "Push!!"
+          fi
