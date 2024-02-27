@@ -28,7 +28,7 @@ jobs:
         if: github.event_name == 'pull_request'
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.ROLE_PR}}
+          role-to-assume: ${{ secrets.ROLE}}
           aws-region: ${{ secrets.REGION }}
 
       - name: configure aws credentials for Merge
@@ -36,7 +36,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.ROLE_MERGE}}
-          aws-region: ${{ secrets.REGION }}
+          aws-region: "eu-central-1"
           
       - name: where am i
         run: |
