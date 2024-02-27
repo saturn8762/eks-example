@@ -12,8 +12,8 @@ jobs:
     steps:
       - name: where am i
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
+          if [ "${{ inputs.env }}" == "pull_request" ]; then
             echo "PR!!"
-          elif [ "${{ github.event_name }}" == "push" ]; then
+          elif [ "${{ inputs.env }}" == "push" ]; then
             echo "Push!!"
           fi
