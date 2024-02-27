@@ -31,7 +31,7 @@ jobs:
           aws-region: ${{ secrets.REGION }}
 
       - name: Run common steps
-        uses: ./.github/workflows/common-steps.yml
+        uses: ./.github/workflows/comm.yml
 
   push:
     if: github.event_name == 'push'
@@ -50,4 +50,4 @@ jobs:
           aws-region: "eu-central-1"
 
       - name: Run common steps
-        uses: ./.github/workflows/common-steps.yml
+        uses: ./.github/workflows/comm.yml
