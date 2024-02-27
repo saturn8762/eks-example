@@ -1,20 +1,19 @@
-name: Common Steps
+name: common_steps
 
 on:
+  pull_request:
+    branches: [ love ]
 
 permissions:
       id-token: write
       contents: read
 
 jobs:
-  common_steps:
-    runs-on: ubuntu-latest
-    steps:
 
+  echo:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
       - name: where am i
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
             echo "PR!!"
-          elif [ "${{ github.event_name }}" == "push" ]; then
-            echo "Push!!"
-          fi
