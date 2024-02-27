@@ -12,8 +12,13 @@ jobs:
 
   echo:
     runs-on: ubuntu-latest
-    environment: prod
     steps:
+      - name: git clone the repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
       - name: where am i
         run: |
-            echo "PR!!"
+          echo "PR!!"
