@@ -24,12 +24,20 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: configure aws credentials
+      - name: configure aws credentials for PR
+        if: github.event_name == 'pull_request'
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.ROLE}}
+          role-to-assume: ${{ secrets.ROLE_PR}}
           aws-region: ${{ secrets.REGION }}
 
+      - name: configure aws credentials for Merge
+        if: github.event_name == 'push'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ROLE_MERGE}}
+          aws-region: ${{ secrets.REGION }}
+          
       - name: where am i
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
