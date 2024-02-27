@@ -18,30 +18,22 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-      - name: git clone the repository
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
 
       - name: configure aws credentials for PR
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.ROLE}}
-          aws-region: ${{ secrets.REGION }}
+          role-to-assume: ${{ secrets.ROLE_PR}}
+          aws-region: "eu-central-1"
 
       - name: Run common steps
         uses: ./.github/workflows/comm.yml
+        with:
+          env: '${{ github.event_name }}'
 
   push:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - name: git clone the repository
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
-          fetch-depth: 0
 
       - name: configure aws credentials for Merge
         uses: aws-actions/configure-aws-credentials@v4
@@ -51,3 +43,5 @@ jobs:
 
       - name: Run common steps
         uses: ./.github/workflows/comm.yml
+        with:
+          env: '${{ github.event_name }}'
