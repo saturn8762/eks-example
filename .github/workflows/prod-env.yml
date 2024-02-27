@@ -34,13 +34,16 @@ jobs:
     runs-on: ubuntu-latest
     environment: prod
     steps:
-
+    
       - name: configure aws credentials for PR
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.ROLE}}
           aws-region: ${{ secrets.REGION }}
 
+      - name: Run common steps
+        uses: ./.github/actions/common_steps
+        
   push:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
@@ -51,3 +54,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.ROLE_MERGE}}
           aws-region: "eu-central-1"
+
+      - name: Run common steps
+        uses: ./.github/actions/common_steps
+        
