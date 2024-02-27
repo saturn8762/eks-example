@@ -7,9 +7,6 @@ name: common_steps
 #         required: true
 
 on:
-  pull_request:
-    branches: [ main ]
-    types: [ opened, synchronize ]
   push:
     branches: [ main ]
     
