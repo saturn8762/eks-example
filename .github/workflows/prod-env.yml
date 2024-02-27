@@ -22,8 +22,8 @@ jobs:
       - name: configure aws credentials for PR
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.ROLE_PR}}
-          aws-region: "eu-central-1"
+          role-to-assume: ${{ secrets.ROLE }}
+          aws-region: ${{ secrets.REGION }}
           
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -41,7 +41,7 @@ jobs:
       - name: configure aws credentials for Merge
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.ROLE_MERGE}}
+          role-to-assume: ${{ secrets.ROLE_MERGE }}
           aws-region: "eu-central-1"
 
       - name: Checkout repository
