@@ -1,10 +1,17 @@
 name: common_steps
+# on:
+#   workflow_call:
+#     inputs:
+#       env:
+#         type: string
+#         required: true
+
 on:
-  workflow_call:
-    inputs:
-      env:
-        type: string
-        required: true
+  pull_request:
+    branches: [ main ]
+    types: [ opened, synchronize ]
+  push:
+    branches: [ main ]
     
 jobs:
   echo:
