@@ -24,7 +24,10 @@ jobs:
         with:
           role-to-assume: ${{ secrets.ROLE_PR}}
           aws-region: "eu-central-1"
-
+          
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
       - name: Run common steps
         uses: ./.github/workflows/comm.yml
         with:
@@ -40,6 +43,9 @@ jobs:
         with:
           role-to-assume: ${{ secrets.ROLE_MERGE}}
           aws-region: "eu-central-1"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Run common steps
         uses: ./.github/workflows/comm.yml
