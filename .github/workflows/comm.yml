@@ -1,5 +1,11 @@
 name: Common Steps
 
+on:
+
+permissions:
+      id-token: write
+      contents: read
+
 jobs:
   common_steps:
     runs-on: ubuntu-latest
