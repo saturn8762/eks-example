@@ -1,0 +1,20 @@
+name: Common Steps
+on: []
+
+jobs:
+  common_steps:
+    runs-on: ubuntu-latest
+    steps:
+      - name: git clone the repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: where am i
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "PR!!"
+          elif [ "${{ github.event_name }}" == "push" ]; then
+            echo "Push!!"
+          fi
