@@ -16,7 +16,7 @@ jobs:
   pull_request:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    environment: prod
+    environment: PR1
     steps:
 
       - name: configure aws credentials for PR
@@ -24,7 +24,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.ROLE }}
           aws-region: ${{ secrets.REGION }}
-          
+
       - name: git clone the repository
         uses: actions/checkout@v3
         with:
@@ -33,7 +33,7 @@ jobs:
 
       - name: echo
         run: |
-            echo "oops"
+            echo "Hi there!"
 
   push:
     if: github.event_name == 'push'
@@ -51,5 +51,5 @@ jobs:
 
       - name: echo
         run: |
-            echo "hi there"
-            
+            echo "Bye there!"
+
