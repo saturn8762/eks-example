@@ -12,36 +12,44 @@ permissions:
       contents: read
 
 jobs:
-  gh_env_test:
+
+  pull_request:
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     environment: prod
-
     steps:
 
+      - name: configure aws credentials for PR
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ROLE }}
+          aws-region: ${{ secrets.REGION }}
+          
       - name: git clone the repository
         uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: configure aws credentials for PR
-        if: github.event_name == 'pull_request'
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.ROLE}}
-          aws-region: ${{ secrets.REGION }}
+      - name: echo
+        run: |
+            echo "oops"
+
+  push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
 
       - name: configure aws credentials for Merge
-        if: github.event_name == 'push'
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.ROLE_MERGE}}
+          role-to-assume: ${{ secrets.ROLE_MERGE }}
           aws-region: "eu-central-1"
-          
-      - name: where am i
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: echo
         run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            echo "PR!!"
-          elif [ "${{ github.event_name }}" == "push" ]; then
-            echo "Push!!"
-          fi
+            echo "hi there"
+            

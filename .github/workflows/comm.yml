@@ -1,0 +1,34 @@
+name: common_steps
+# on:
+#   workflow_call:
+#     inputs:
+#       env:
+#         type: string
+#         required: true
+
+on:
+  push:
+    branches: [ main ]
+    
+jobs:
+  echo:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: git clone the repository
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+          
+      - name: echo
+        run: |
+            echo "oops"
+        
+      - name: where am i
+        run: |
+          if [ "${{ inputs.env }}" == "pull_request" ]; then
+            echo "PR!!"
+          elif [ "${{ inputs.env }}" == "push" ]; then
+            echo "Push!!"
+          fi
