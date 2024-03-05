@@ -35,21 +35,21 @@ jobs:
         run: |
             echo "Hi there!"
 
-  # push:
-  #   if: github.event_name == 'push'
-  #   runs-on: ubuntu-latest
-  #   steps:
+  push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
 
-  #     - name: configure aws credentials for Merge
-  #       uses: aws-actions/configure-aws-credentials@v4
-  #       with:
-  #         role-to-assume: ${{ secrets.ROLE_MERGE }}
-  #         aws-region: "eu-central-1"
+      - name: configure aws credentials for Merge
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ROLE_MERGE }}
+          aws-region: "eu-central-1"
 
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-  #     - name: echo
-  #       run: |
-  #           echo "Bye there!"
+      - name: echo
+        run: |
+            echo "Bye there!"
 
