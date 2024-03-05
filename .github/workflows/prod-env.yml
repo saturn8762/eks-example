@@ -16,7 +16,7 @@ jobs:
   pull_request:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
-    environment: prod
+    environment: PR1
     steps:
 
       - name: configure aws credentials for PR
@@ -24,7 +24,7 @@ jobs:
         with:
           role-to-assume: ${{ secrets.ROLE }}
           aws-region: ${{ secrets.REGION }}
-          
+
       - name: git clone the repository
         uses: actions/checkout@v3
         with:
@@ -33,23 +33,23 @@ jobs:
 
       - name: echo
         run: |
-            echo "oops"
+            echo "Hi there!"
 
-  push:
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
+  # push:
+  #   if: github.event_name == 'push'
+  #   runs-on: ubuntu-latest
+  #   steps:
 
-      - name: configure aws credentials for Merge
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          role-to-assume: ${{ secrets.ROLE_MERGE }}
-          aws-region: "eu-central-1"
+  #     - name: configure aws credentials for Merge
+  #       uses: aws-actions/configure-aws-credentials@v4
+  #       with:
+  #         role-to-assume: ${{ secrets.ROLE_MERGE }}
+  #         aws-region: "eu-central-1"
 
-      - name: Checkout repository
-        uses: actions/checkout@v2
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v2
 
-      - name: echo
-        run: |
-            echo "hi there"
-            
+  #     - name: echo
+  #       run: |
+  #           echo "Bye there!"
+
