@@ -31,16 +31,25 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-  # push:
-  #   if: github.event_name == 'push'
-  #   runs-on: ubuntu-latest
-  #   steps:
+      - name: echo
+        run: |
+            echo "oops"
 
-  #     - name: configure aws credentials for Merge
-  #       uses: aws-actions/configure-aws-credentials@v4
-  #       with:
-  #         role-to-assume: ${{ secrets.ROLE_MERGE }}
-  #         aws-region: "eu-central-1"
+  push:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
 
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v2
+      - name: configure aws credentials for Merge
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.ROLE_MERGE }}
+          aws-region: "eu-central-1"
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: echo
+        run: |
+            echo "hi there"
+            
