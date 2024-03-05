@@ -30,11 +30,6 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
-        
-      - name: Run common steps
-        uses: ./.github/workflows/comm.yml
-        with:
-          env: '${{ github.event_name }}'
 
   push:
     if: github.event_name == 'push'
@@ -49,8 +44,3 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v2
-
-      - name: Run common steps
-        uses: ./.github/workflows/comm.yml
-        with:
-          env: '${{ github.event_name }}'
